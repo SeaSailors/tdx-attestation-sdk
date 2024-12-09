@@ -1315,7 +1315,7 @@ checksum = "e8566979429cf69b49a5c740c60791108e86440e8be149bbea4fe54d2c32d6e2"
 [[package]]
 name = "dcap-rs"
 version = "0.1.0"
-source = "git+https://github.com/automata-network/dcap-rs.git#4fb660ee503e09625e42e7bd45dc1566a0f40f6d"
+source = "git+https://github.com/SeaSailors/dcap-rs.git?branch=feat-quote-v5#69e6667689b9cbaf4b2bebf6f3a966ec502c1a6b"
 dependencies = [
  "alloy-sol-types 0.8.13",
  "chrono",
