@@ -1,6 +1,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
+use dcap_rs::types::quotes::version_5::QuoteV5;
 use dcap_rs::types::{
     collaterals::IntelCollateral, quotes::version_3::QuoteV3, quotes::version_4::QuoteV4,
     VerifiedOutput,
@@ -9,6 +10,7 @@ use dcap_rs::utils::cert::{hash_crl_keccak256, hash_x509_keccak256};
 use dcap_rs::utils::hash::keccak256sum;
 use dcap_rs::utils::quotes::version_3::verify_quote_dcapv3;
 use dcap_rs::utils::quotes::version_4::verify_quote_dcapv4;
+use dcap_rs::utils::quotes::version_5::verify_quote_dcapv5;
 
 pub fn main() {
     // Read the input
@@ -54,8 +56,12 @@ pub fn main() {
             let quote = QuoteV4::from_bytes(&quote_slice);
             verified_output = verify_quote_dcapv4(&quote, &intel_collaterals, current_time);
         }
+        5 => {
+            let quote = QuoteV5::from_bytes(&quote_slice);
+            verified_output = verify_quote_dcapv5(&quote, &intel_collaterals, current_time);
+        }
         _ => {
-            panic!("Unsupported quote version");
+            panic!("Unsupported quote version {}", quote_version);
         }
     }
 
